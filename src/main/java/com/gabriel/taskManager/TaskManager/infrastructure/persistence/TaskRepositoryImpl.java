@@ -1,8 +1,10 @@
 package com.gabriel.taskManager.TaskManager.infrastructure.persistence;
 
+import com.gabriel.taskManager.TaskManager.application.mapper.TaskMapper;
 import com.gabriel.taskManager.TaskManager.domain.entity.Task;
 import com.gabriel.taskManager.TaskManager.domain.repository.TaskRepository;
 import com.gabriel.taskManager.TaskManager.infrastructure.persistence.entity.TaskPersistenceEntity;
+import com.gabriel.taskManager.TaskManager.presentation.dto.TaskOutput;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -18,31 +20,24 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Task save(Task task) {
-        TaskPersistenceEntity entity = new TaskPersistenceEntity(
-                task.getId(),
-                task.getTitle(),
-                task.getDescription(),
-                task.getDueDate(),
-                task.isCompleted()
-        );
-        TaskPersistenceEntity saved = jpaTaskRepository.save(entity);
-        return new Task(saved.getId(), saved.getTitle(), saved.getDescription(), saved.getDueDate(), saved.isCompleted());
+    public TaskOutput save(Task task) {
+        TaskPersistenceEntity saved = jpaTaskRepository.save(TaskMapper.toEntity(task));
+        return TaskMapper.toDomain(saved);
     }
 
     @Override
-    public List<Task> findAll() {
+    public List<TaskOutput> findAll() {
         return jpaTaskRepository.findAll()
                 .stream()
-                .map(e -> new Task(e.getId(), e.getTitle(), e.getDescription(), e.getDueDate(), e.isCompleted()))
+                .map(TaskMapper::toDomain)
                 .toList();
     }
 
     @Override
-    public Optional<Task> findById(Long id) {
+    public Optional<TaskOutput> findById(Long id) {
         return jpaTaskRepository
                 .findById(id)
-                .map(e -> new Task(e.getId(), e.getTitle(), e.getDescription(), e.getDueDate(), e.isCompleted()));
+                .map(TaskMapper::toDomain);
     }
 
     @Override
