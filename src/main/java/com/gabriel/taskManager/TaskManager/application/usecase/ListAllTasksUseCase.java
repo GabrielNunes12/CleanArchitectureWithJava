@@ -2,6 +2,7 @@ package com.gabriel.taskManager.TaskManager.application.usecase;
 
 import com.gabriel.taskManager.TaskManager.domain.entity.Task;
 import com.gabriel.taskManager.TaskManager.domain.repository.TaskRepository;
+import com.gabriel.taskManager.TaskManager.presentation.dto.TaskOutput;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public class ListAllTasksUseCase {
         this.taskRepository = taskRepository;
     }
 
-    public List<Task> execute() {
+    public List<TaskOutput> execute() {
         return taskRepository.findAll();
     }
 }
