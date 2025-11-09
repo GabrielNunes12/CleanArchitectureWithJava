@@ -1,15 +1,17 @@
 package com.gabriel.taskManager.TaskManager.domain.entity;
 
+import com.gabriel.taskManager.TaskManager.domain.ValueObjects.Description;
+
 import java.time.LocalDate;
 
 public class Task {
     private Long id;
     private String title;
-    private String description;
+    private Description description;
     private LocalDate dueDate;
     private boolean completed;
 
-    public Task(Long id, String title, String description, LocalDate dueDate, boolean completed) {
+    public Task(Long id, String title, Description description, LocalDate dueDate, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -37,11 +39,11 @@ public class Task {
         this.title = title;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 

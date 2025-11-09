@@ -1,5 +1,6 @@
 package com.gabriel.taskManager.TaskManager.infrastructure.persistence.entity;
 
+import com.gabriel.taskManager.TaskManager.domain.ValueObjects.Description;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -12,16 +13,20 @@ public class TaskPersistenceEntity {
     private Long id;
 
     private String title;
-    private String description;
+    private Description description;
     private LocalDate dueDate;
     private boolean completed;
 
-    public TaskPersistenceEntity(Long id, String title, String description, LocalDate dueDate, boolean completed) {
+    public TaskPersistenceEntity(Long id, String title, Description description, LocalDate dueDate, boolean completed) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.completed = completed;
+    }
+
+    public TaskPersistenceEntity() {
+
     }
 
     public Long getId() {
@@ -40,13 +45,10 @@ public class TaskPersistenceEntity {
         this.title = title;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public LocalDate getDueDate() {
         return dueDate;
