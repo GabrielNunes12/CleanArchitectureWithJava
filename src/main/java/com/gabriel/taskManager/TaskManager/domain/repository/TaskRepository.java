@@ -7,7 +7,7 @@ import com.gabriel.taskManager.TaskManager.presentation.dto.TaskOutput;
 import java.util.List;
 import java.util.Optional;
 
-public interface TaskRepository {
+public interface TaskRepository extends RepositoryInterface<TaskOutput, Task>{
     TaskOutput save(Task task);
     List<TaskOutput> findAll();
     Optional<TaskOutput> findById(Long id);
